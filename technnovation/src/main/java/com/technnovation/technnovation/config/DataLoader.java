@@ -1,4 +1,4 @@
-package com.technnovation.technnovation.Config;
+package com.technnovation.technnovation.config;
 
 import com.technnovation.technnovation.Model.*;
 import com.technnovation.technnovation.Repository.*;
