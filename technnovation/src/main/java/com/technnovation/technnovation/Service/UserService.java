@@ -27,11 +27,16 @@ public class UserService {
 
     public UserResponseDTO crearUsuario(UserRequestDTO dto) {
 
+        // Idealmente usar BCryptPasswordEncoder (más adelante)
         User user = User.builder()
                 .nombre(dto.getNombre())
                 .correo(dto.getCorreo())
                 .contrasenaHash(dto.getContrasena())
                 .avatarUrl(dto.getAvatarUrl())
+                // Nuevos campos:
+                .ubicacion(dto.getUbicacion())
+                .pais(dto.getPais())
+                // Los demás valores por defecto con @Builder.Default se asignan solos
                 .build();
 
         User guardado = userRepository.save(user);
@@ -45,6 +50,12 @@ public class UserService {
                 .correo(user.getCorreo())
                 .avatarUrl(user.getAvatarUrl())
                 .rol(user.getRol())
+                // Nuevos campos en Response:
+                .ubicacion(user.getUbicacion())
+                .pais(user.getPais())
+                .nivelAcceso(user.getNivelAcceso())
+                .reputacion(user.getReputacion())
+                .seguridad(user.getSeguridad())
                 .build();
     }
 
@@ -56,9 +67,10 @@ public class UserService {
         if (dto.getNombre() != null) usuario.setNombre(dto.getNombre());
         if (dto.getCorreo() != null) usuario.setCorreo(dto.getCorreo());
         if (dto.getAvatarUrl() != null) usuario.setAvatarUrl(dto.getAvatarUrl());
+        if (dto.getUbicacion() != null) usuario.setUbicacion(dto.getUbicacion());
+        if (dto.getPais() != null) usuario.setPais(dto.getPais());
 
         User actualizado = userRepository.save(usuario);
-
         return toResponseDTO(actualizado);
     }
 
@@ -72,4 +84,3 @@ public class UserService {
     }
 
 }
-
