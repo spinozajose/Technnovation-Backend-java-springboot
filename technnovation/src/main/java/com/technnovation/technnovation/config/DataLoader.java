@@ -3,12 +3,14 @@ package com.technnovation.technnovation.config;
 import com.technnovation.technnovation.Model.*;
 import com.technnovation.technnovation.Repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Component
+@Profile("!test")
 public class DataLoader implements CommandLineRunner {
 
     private final UserRepository userRepository;
